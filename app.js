@@ -3,6 +3,7 @@ import express from 'express';
 
 const app = express();
 const port = 3000;
+const keepAlive = process.argv[2] || '5m'
 
 app.get('/', (req, res) => {
    res.send("Olá, aceda ao URL '/ask' para enviar a sua questão caso já tenha realizado todos os passos descritos no README.");
@@ -29,6 +30,6 @@ app.get('/ask', async (req, res) => {
 })
 
 app.listen(port, async () => {
-   await indexDocuments();
+   await indexDocuments(keepAlive);
    console.log("Carregamento dos documentos concluída.");
 })

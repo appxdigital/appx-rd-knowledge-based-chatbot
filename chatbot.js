@@ -38,13 +38,13 @@ const createStoreHash = async () => {
    return hash;
 }
 
-const indexDocuments = async () => {
+const indexDocuments = async (keepAlive) => {
    const hash = await createStoreHash();
 
    if (!fs.existsSync(hash)) {
       const embeddings = new OllamaEmbeddings({
          model: "llama3.1:latest",
-         keepAlive: "30m"
+         keepAlive
       });
 
       const loader = new DirectoryLoader(
