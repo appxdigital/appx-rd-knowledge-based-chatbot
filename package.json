@@ -1,0 +1,23 @@
+{
+  "name": "rag_chatbot",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Retrieval-Augmented Generation powered Chatbot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/community": "^0.3.4",
+    "@langchain/core": "^0.3.7",
+    "@langchain/ollama": "^0.1.0",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.19.2",
+    "faiss-node": "^0.5.1",
+    "langchain": "^0.3.2",
+    "pdf-parse": "^1.1.1"
+  }
+}
