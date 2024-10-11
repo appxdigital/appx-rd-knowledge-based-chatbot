@@ -17,7 +17,7 @@ Logo, foi tomada a decisão de utilizar o Llama 3.1 para ler o documento e respo
 
 ## Setup
 
-Para correr este projeto é necessário introduzir documentos que o modelo irá  carregar e adicionar ao seu conhecimento. Estes documentos devem ser colocados na pasta `documents` e podem ser ficheiros de texto (.txt) ou PDF (.pdf).
+Para correr este projeto é necessário introduzir documentos que o modelo irá  carregar e adicionar ao seu conhecimento. Estes documentos devem ser colocados na pasta `documents` e podem ser ficheiros de texto (`.txt`) ou PDF (`.pdf`).
 
 Após introduzir os documentos, é necessário iniciar o servidor. Tal pode ser  feito executando `node app.js` no terminal no root do projeto ou através de um IDE. O servidor estará à espera de pedidos no porto 3000.
 
@@ -32,10 +32,10 @@ Após introduzir os documentos, é necessário iniciar o servidor. Tal pode ser 
 
 Este endpoint envia uma pergunta para o modelo e retorna a resposta no formato de stream. A resposta é enviada em blocos para o cliente.
 
-- Parâmetros:
-`question`
- - Tipo: `string`
- - Exemplo: `/ask?question="De que cor é o Sol?"`
+Parâmetros:
+ - `question`
+ 	- Tipo: `string`
+ 	- Exemplo: `/ask?question="De que cor é o Sol?"`
 
 Respostas:
  - 200: A resposta é enviada em blocos à medida que o modelo gera a resposta.
