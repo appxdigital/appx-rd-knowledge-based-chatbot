@@ -43,7 +43,8 @@ const indexDocuments = async () => {
 
    if (!fs.existsSync(hash)) {
       const embeddings = new OllamaEmbeddings({
-         model: "llama3.1:latest"
+         model: "llama3.1:latest",
+         keepAlive: "30m"
       });
 
       const loader = new DirectoryLoader(
