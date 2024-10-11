@@ -43,7 +43,7 @@ const indexDocuments = async () => {
 
    if (!fs.existsSync(hash)) {
       const embeddings = new OllamaEmbeddings({
-         model: "llama3.1:8b"
+         model: "llama3.1:latest"
       });
 
       const loader = new DirectoryLoader(
@@ -73,7 +73,7 @@ const indexDocuments = async () => {
 
 const runLLM = async (question) => {
    const embeddings = new OllamaEmbeddings({
-      model: "llama3.1:8b"
+      model: "llama3.1:latest"
    });
 
    const vectorStore = await FaissStore.load(hash, embeddings);
@@ -84,7 +84,7 @@ const runLLM = async (question) => {
       ["human", "Question: {question} Context: {context} Answer:"]
    ]);
 
-   const llamaModel = new ChatOllama({model: "llama3.1:8b"});
+   const llamaModel = new ChatOllama({model: "llama3.1:latest"});
 
    const ragChain = await createStuffDocumentsChain({
       llm: llamaModel,
@@ -97,7 +97,7 @@ const runLLM = async (question) => {
       ["human", "{text}"]
    ]);
 
-   const gemma2Model = new ChatOllama({model: "gemma2:9b"});
+   const gemma2Model = new ChatOllama({model: "gemma2:latest"});
 
    const llmChain = RunnableSequence.from([
       ragChain,
@@ -106,7 +106,7 @@ const runLLM = async (question) => {
       },
       promptGemma2,
       gemma2Model,
-      new StringOutputParser().withConfig({ runName: "my_parser" })
+      new StringOutputParser()
    ])
 
    const answerStream = await llmChain.stream({
