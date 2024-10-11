@@ -17,7 +17,8 @@ Logo, foi tomada a decisão de utilizar o Llama 3.1 para ler o documento e respo
 
 ## Setup
 
-Para correr este projeto é necessário introduzir os documentos que o modelo irá carregar e adicionar ao seu conhecimento. Estes documentos devem ser colocados na pasta `documents` e podem ser ficheiros de texto (`.txt`) ou PDF (`.pdf`).
+Para correr este projeto é necessário colocar os documentos que o modelo irá carregar e adicionar ao seu conhecimento na pasta `documents`.
+Antes de colocar quaisquer documentos nesta pasta, certifique-se que remove o ficheiro `remover.txt` da pasta. Deve colocar apenas ficheiros de texto (`.txt`) ou PDF (`.pdf`).
 
 Após introduzir os documentos, é necessário iniciar o servidor. Tal pode ser  feito executando `node app.js` no terminal no root do projeto ou através de um IDE. O servidor estará à espera de pedidos no porto 3000.
 
