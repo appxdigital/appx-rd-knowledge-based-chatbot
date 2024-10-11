@@ -18,7 +18,7 @@ Logo, foi tomada a decisão de utilizar o Llama 3.1 para ler o documento e respo
 ## Setup
 
 Para correr este projeto é necessário colocar os documentos que o modelo irá carregar e adicionar ao seu conhecimento na pasta `documents`.
-Antes de colocar quaisquer documentos nesta pasta, certifique-se que remove o ficheiro `remover.txt` da pasta. Deve colocar apenas ficheiros de texto (`.txt`) ou PDF (`.pdf`).
+Antes de colocar quaisquer documentos nesta pasta, certifique-se que remove o ficheiro `remover.txt` da pasta. Apenas devem ser colocados ficheiros de texto (`.txt`) ou PDF (`.pdf`).
 
 ### Iniciar o servidor
 
