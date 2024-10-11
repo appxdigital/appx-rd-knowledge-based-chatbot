@@ -40,4 +40,4 @@ Parâmetros:
 Respostas:
  - 200: A resposta é enviada em blocos à medida que o modelo gera a resposta.
  - 400: Quando o parâmetro `question` está em falta ou vazio.
- - 500: Quando o servidor encontra um erro durante a geração da resposta à pergunta efetuada pelo cliente
+ - 500: Quando o servidor encontra um erro durante a geração da resposta à pergunta realizada pelo cliente.
