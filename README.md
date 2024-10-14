@@ -24,6 +24,19 @@ Antes de colocar quaisquer documentos nesta pasta, certifique-se que remove o fi
 
 O servidor pode ser iniciado executando `node app.js` no terminal no root do projeto ou através de um IDE. O servidor estará à espera de pedidos no porto 3000.
 
+Se o volume de documentos/texto for muito grande, para impedir que o modelo dê timeout durante o carregamento dos mesmos, pode ser introduzido um argumento ao comando `node app.js` para indicar ao servidor que deve manter o modelo ativo durante um certo tempo. 
+
+Exemplo: `node app.js 10m`
+
+O exemplo acima significa que o modelo vai ficar "ligado" durante 10 minutos para carregar a informação. Podem ser usadas as seguintes unidades de tempo:
+- Segundos: `s`
+- Minutos: `m`
+- Horas: `h`
+
+Se não for colocado este argumento, o tempo são 5 minutos.
+
+A título de exemplo, para um conjunto de PDF's formando um total de 76 páginas de texto numa máquina com um CPU com 8 cores, 32 GB de RAM e um GPU Quadro P4000 com 8 GB de memória GDDR5, não foi necessário utilizar este argumento adicional.
+
 ### Endpoints
 
 `GET /`
