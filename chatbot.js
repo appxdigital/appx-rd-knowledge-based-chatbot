@@ -49,7 +49,7 @@ const indexDocuments = async (keepAlive) => {
 
    if (!fs.existsSync(hash)) {
       const embeddings = new OllamaEmbeddings({
-         model: "llama3.1:latest",
+         model: "mxbai-embed-large:latest",
          keepAlive
       });
 
@@ -80,13 +80,13 @@ const indexDocuments = async (keepAlive) => {
 
 const runLLM = async (question, id) => {
    const embeddings = new OllamaEmbeddings({
-      model: "llama3.1:latest"
+      model: "mxbai-embed-large:latest"
    });
 
    const llama = new ChatOllama({model: "llama3.1:latest"});
 
    const llamaPrompt = ChatPromptTemplate.fromMessages([
-      ["system", "You are an assistant for question-answering tasks. Use only the retrieved context to answer the question. If you don't know the answer, say that you don't know. Use three sentences maximum and keep the answer concise. Answer in Portuguese from Portugal \\n\\n {context}"],
+      ["system", "You are an assistant for question-answering tasks. Use only the retrieved context to answer the question. If you don't know the answer, say that you don't know. Use three sentences maximum and keep the answer concise. Answer in Portuguese from Portugal. \\n\\n Context: {context}"],
       new MessagesPlaceholder("chat_history"),
       ["human", "{input}"],
    ]);
@@ -105,7 +105,7 @@ const runLLM = async (question, id) => {
    });
 
    const messageHistory = new ChatMessageHistory();
-   const config = {configurable: {sessionId: "1"}};
+   const config = {configurable: {sessionId: id}};
 
    const history = await db("messages").where({
       session_id: id
