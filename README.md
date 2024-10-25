@@ -19,7 +19,7 @@ Logo, foi tomada a decisão de utilizar o Llama 3.1 para ler o documento e respo
 
 Em primeiro lugar é necessário instalar o programa Ollama, que permite correr os modelos utilizados pelo chatbot.
 
-Para tal é necessário visitar (https://ollama.com/download) e fazer o download dependendo do sistema operativo.
+Para tal é necessário visitar o site do [Ollama](https://ollama.com/download) e fazer o download dependendo do sistema operativo.
 
 Assim que o Ollama estiver instalado, é necessário fazer download dos modelos utilizados pelo chatbot através da execução dos seguintes comandos no terminal:
 - `ollama pull mxbai-embed-large`
