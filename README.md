@@ -17,7 +17,18 @@ Logo, foi tomada a decisão de utilizar o Llama 3.1 para ler o documento e respo
 
 ## Setup
 
-Para correr este projeto é necessário colocar os documentos que o modelo irá carregar e adicionar ao seu conhecimento na pasta `documents`.
+Em primeiro lugar é necessário instalar o programa Ollama, que permite correr os modelos utilizados pelo chatbot.
+
+Para tal é necessário visitar (https://ollama.com/download) e fazer o download dependendo do sistema operativo.
+
+Assim que o Ollama estiver instalado, é necessário fazer download dos modelos utilizados pelo chatbot através da execução dos seguintes comandos no terminal:
+- `ollama pull mxbai-embed-large`
+- `ollama pull llama3.1`
+- `ollama pull gemma2`
+
+Garanta aproximadamente 13 GB de armazenamento disponíveis para guardar estes 3 modelos.
+
+De seguida, é necessário colocar os documentos que o modelo irá carregar e adicionar ao seu conhecimento na pasta `documents`.
 Antes de colocar quaisquer documentos nesta pasta, certifique-se que remove o ficheiro `remover.txt` da pasta. Apenas devem ser colocados ficheiros de texto (`.txt`) ou PDF (`.pdf`).
 
 ### Iniciar o servidor
