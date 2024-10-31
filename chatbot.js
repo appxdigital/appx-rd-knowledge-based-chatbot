@@ -11,13 +11,10 @@ import fsASync from "fs/promises";
 import crypto from "crypto";
 import {TextLoader} from "langchain/document_loaders/fs/text";
 import {createRetrievalChain} from "langchain/chains/retrieval";
-import {createHistoryAwareRetriever} from "langchain/chains/history_aware_retriever";
 import {ChatMessageHistory} from "@langchain/community/stores/message/in_memory";
 import {RunnableSequence, RunnableWithMessageHistory} from "@langchain/core/runnables";
 import {AIMessage, HumanMessage} from "@langchain/core/messages";
-import {PostgresChatMessageHistory} from "@langchain/community/stores/message/postgres";
 import {db} from './mysql/index.js';
-import {StringOutputParser} from "@langchain/core/output_parsers";
 
 let hash = "";
 
@@ -49,7 +46,7 @@ const indexDocuments = async (keepAlive) => {
 
    if (!fs.existsSync(hash)) {
       const embeddings = new OllamaEmbeddings({
-         model: "mxbai-embed-large:latest",
+         model: "nomic-embed-text:latest",
          keepAlive
       });
 
@@ -66,8 +63,8 @@ const indexDocuments = async (keepAlive) => {
       const docs = await loader.load();
 
       const textSplitter = new RecursiveCharacterTextSplitter({
-         chunkSize: 500,
-         chunkOverlap: 100,
+         chunkSize: 800,
+         chunkOverlap: 150,
       });
 
       const splits = await textSplitter.splitDocuments(docs)
@@ -80,15 +77,15 @@ const indexDocuments = async (keepAlive) => {
 
 const runLLM = async (question, id) => {
    const embeddings = new OllamaEmbeddings({
-      model: "mxbai-embed-large:latest"
+      model: "nomic-embed-text:latest"
    });
 
    const llama = new ChatOllama({model: "llama3.1:latest"});
 
    const llamaPrompt = ChatPromptTemplate.fromMessages([
-      ["system", "You are an assistant for question-answering tasks. Use only the retrieved context to answer the question. If you don't know the answer, say that you don't know. Use three sentences maximum and keep the answer concise. Answer in Portuguese from Portugal. \\n\\n Context: {context}"],
+      ["system", "You are an assistant for question-answering tasks. Use only the retrieved context to answer the question. If you don't know the answer, say that you don't know and ask to reformulate the question or ask again. Use three sentences maximum and keep the answer concise. AppX is a company. Questions that mention AppX should be regarded as questions about it and nothing else.  \\n\\n Context: {context}"],
       new MessagesPlaceholder("chat_history"),
-      ["human", "{input}"],
+      ["human", "Question: {input}"],
    ]);
 
    const vectorStore = await FaissStore.load(hash, embeddings);
@@ -127,25 +124,15 @@ const runLLM = async (question, id) => {
       getMessageHistory: (_sessionId) => messageHistory
    });
 
-   const promptGemma2 = ChatPromptTemplate.fromMessages([
-      ["system", "You are an assistant for text translation/correction. Rewrite the given text to Portuguese from Portugal. Don't describe what you rewrote. Don't output the message you had to translate."],
-      ["human", "{text}"]
-   ]);
-
-   const gemma2Model = new ChatOllama({model: "gemma2:latest"});
-
    const llmChain = RunnableSequence.from([
       (input) => {
          return {input: input.question};
       },
       withHistory,
       (output) => {
-         return {text: output.answer};
+         return output.answer;
       },
-      promptGemma2,
-      gemma2Model,
-      new StringOutputParser()
-   ])
+   ]);
 
    const answerStream = await llmChain.stream({
          question,

@@ -25,8 +25,8 @@ app.get('/ask', async (req, res) => {
       let answer = '';
 
       for await (const chunk of answerStream) {
-            res.write(chunk);
-            answer += chunk;
+         res.write(chunk);
+         answer += chunk;
       }
 
       await db('messages').insert({
