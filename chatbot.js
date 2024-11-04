@@ -83,7 +83,7 @@ const runLLM = async (question, id) => {
    const llama = new ChatOllama({model: "llama3.1:latest"});
 
    const llamaPrompt = ChatPromptTemplate.fromMessages([
-      ["system", "You are an assistant for question-answering tasks. Use only the retrieved context to answer the question. If you don't know the answer, say that you don't know and ask to reformulate the question or ask again. Use three sentences maximum and keep the answer concise. AppX is a company and should be addressed in the third person. Questions that mention AppX should be regarded as questions about it and nothing else.  \\n\\n Context: {context}"],
+      ["system", "You are an assistant for question-answering tasks. Use only the retrieved context to answer the question. If you don't know the answer, respond by saying, 'I don't know the answer. Could you please reformulate or ask again?' and nothing else. Use three sentences maximum and keep the answer concise. AppX is a company and should be addressed in the third person. Questions mentioning AppX should be regarded as questions about it and nothing else. \n\n Context: {context}"],
       new MessagesPlaceholder("chat_history"),
       ["human", "Question: {input}"],
    ]);
